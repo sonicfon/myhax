@@ -1,0 +1,32 @@
+Option Compare Database
+
+Private Sub Êíîïêà8_Click()
+Dim Quary As String 'Ïåðåìåííàÿ çàïðîñà'
+Dim Login As String 'Ïåðåìåííàÿ ëîãèíà'
+Dim Pass As String 'Ïåðåìåííàÿ ïàðîëÿ'
+Dim Level As String 'Ïåðåìåííàÿ óðîâíÿ äîñòóïà'
+
+Me.Ïîëå4.SetFocus
+Login = Me.Ïîëå4.Value
+Quary = "Select Ïàðîëü, Óðîâåíü from Àêêàóíòû where Ëîãèí = '" + Login + "'"
+Dim rs As Recordset 'Ïåðåìåííàÿ íàáîðà äàííûõ'
+Dim db As Database
+Set db = CurrentDb
+Set rs = db.OpenRecordset(Quary)
+Pass = rs("Ïàðîëü").Value
+Level = rs("Óðîâåíü").Value
+Me.Ïîëå6.SetFocus
+If Ïîëå6 <> Pass Then
+MsgBox ("Áðàò, òû ÷¸òî òóò íàìóäðèë")
+Else
+If Level = "1" Then
+DoCmd.OpenForm "ÑòàðøèéÓð"
+DoCmd.Close acForm, "Àâòîðèçàöèÿ_Ìàêåò"
+Else
+If Level = "2" Then
+DoCmd.OpenForm "ÌëàäøèéÓð"
+DoCmd.Close acForm, "Àâòîðèçàöèÿ"
+End If
+End If
+End If
+End Sub
